@@ -15,8 +15,26 @@ export class LightsComponent implements OnInit {
   public lights: Light[];
 
   getAllLights(){
-    let get_url: string = "localhost:5000/lights";
-    this.http.get(get_url);
+    let get_url: string = "http://127.0.0.1:5000/lights";
+    console.log("hitting url: " + get_url);
+    console.log("Making sure update worked 2");
+    this.http.get(get_url, {responseType: 'text'}).subscribe(data=>{
+      let data_json = JSON.parse(data);
+      for (let key in data_json){
+        let value = data_json[key];
+        let red = value['rgb_hex'].substr(0, 2);
+        let green = value['rgb_hex'].substr(2, 4);
+        let blue = value['rgb_hex'].substr(4, 6);
+        
+        let rgb_list:[number, number, number] = [parseInt(red, 10), parseInt(green, 10), 
+          parseInt(blue, 10)];
+
+        let bri = value['bri'];
+        let is_on = value['on'];
+
+        this.lights.push(new Light(key, rgb_list, bri, is_on))
+      }
+    });
     let temp: number = 5;
   }
 
@@ -43,6 +61,8 @@ export class LightsComponent implements OnInit {
   };
 
   constructor(private http:HttpClient) { 
+    console.log("In constructor");
+
     this.rgb_vals = {
       'red':0,
       'green':0,
