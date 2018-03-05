@@ -2,6 +2,10 @@
     text-align: "left";
 }
 
+.light_item{
+    border-width: 2em;
+}
+
 mat-slide {
     text-align: "left";
     padding-left: "0";
