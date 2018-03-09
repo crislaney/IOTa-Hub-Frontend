@@ -49,8 +49,10 @@ export class LightsComponent implements OnInit {
     })
   }
 
-  setCurrentStyles(color: string){
-    this.current_color = color;
+  onOffToggle(light: Light){
+    light.is_on = !light.is_on;
+    console.log(light.is_on);
+    this.putLightChange(light);
   }
 
   colorChange(light: Light, color_sel: string, color_val: number) {

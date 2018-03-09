@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { LightsComponent } from './lights/lights.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule, MatButtonModule, MatSliderModule, MatListModule,
-MatGridListModule, MatTableModule } from '@angular/material';
+MatGridListModule, MatTableModule, MatSlideToggleModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { Routes, RouterModule } from '@angular/router';
@@ -30,7 +30,8 @@ import { AboutComponent } from './about/about.component'
     MatTableModule,
     RouterModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

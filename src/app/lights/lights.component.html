@@ -1,7 +1,9 @@
 <div fxLayout="row">
     <div class="light_item" fxLayout="column" *ngFor="let light of lights">
         <div fxLayout="column">
-            <div fxLayoutAlign="left">{{light.name}}</div>
+            <div fxLayoutAlign="left">{{light.name}}
+                <span><mat-slide-toggle (change)="onOffToggle(light)" checked="{{light.is_on}}"></mat-slide-toggle></span>
+            </div>
         </div>
         <div class="tableContainer">
             <div fxLayout="row">
