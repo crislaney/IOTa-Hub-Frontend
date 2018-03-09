@@ -4,7 +4,7 @@
             <div fxLayoutAlign="left">{{light.name}}</div>
         </div>
         <div class="tableContainer">
-            <div fxLayout="row">
+            <div fxLayout="row wrap">
                 <mat-list>
                     <mat-list-item>
                         <mat-slider (change)="colorChange(light, 'red', redSlide.value)" #redSlide min="0" max="255" step="1" value={{light.rgb[0]}}></mat-slider>
