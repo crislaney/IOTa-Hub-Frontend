@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<div fxLayout="row wrap">
     <div class="light_item" fxLayout="column" *ngFor="let light of lights">
         <div fxLayout="column">
             <div fxLayoutAlign="left">{{light.name}}
@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="tableContainer">
-            <div fxLayout="row wrap">
+            <div fxLayout="row">
                 <mat-list>
                     <mat-list-item>
                         <mat-slider (change)="colorChange(light, 'red', redSlide.value)" #redSlide min="0" max="255" step="1" value={{light.rgb[0]}}></mat-slider>

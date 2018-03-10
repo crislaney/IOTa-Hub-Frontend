@@ -10,7 +10,9 @@ import { FlexLayoutModule} from '@angular/flex-layout';
 import { Routes, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './about/about.component';
-import { ScriptCreatorComponent } from './script-creator/script-creator.component'
+import { ScriptCreatorComponent } from './script-creator/script-creator.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignInComponent } from './sign-in/sign-in.component'
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { ScriptCreatorComponent } from './script-creator/script-creator.componen
     LightsComponent,
     AboutComponent,
     ScriptCreatorComponent,
+    SignUpComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,

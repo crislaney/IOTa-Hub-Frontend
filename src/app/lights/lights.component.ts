@@ -16,7 +16,7 @@ export class LightsComponent implements OnInit {
   public lights: Light[];
 
   getAllLights(){
-    let get_url: string = "http://127.0.0.1:5000/lights";
+    let get_url: string = "http://localhost:5000/api/lights";
     this.http.get(get_url, {responseType: 'text'}).subscribe(data=>{
       let data_json = JSON.parse(data);
       for (let key in data_json){
@@ -39,7 +39,7 @@ export class LightsComponent implements OnInit {
   putLightChange(light: Light){
     let url_name: string = encodeURI(light.name);
     
-    let put_light_url: string = "http://localhost:5000/light/" + url_name;
+    let put_light_url: string = "http://localhost:5000/api/light/" + url_name;
     let body = light.toReqBody();
     this.http.put(put_light_url, body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
