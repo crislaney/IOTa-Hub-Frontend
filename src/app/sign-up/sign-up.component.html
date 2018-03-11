@@ -2,19 +2,19 @@
 <div class="sign-in-component" fxLayout="column" fxLayoutAlign="center center" fxFlex="20%">
     <form class="user-name">
         <mat-form-field>
-            <input matInput placeholder="User Name" value="User name here">
+            <input #username matInput placeholder="User Name" value="User name here">
         </mat-form-field>
     </form>
     <form class="password-field">
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" value="Password">
+            <input #pass matInput placeholder="Password" value="Password">
         </mat-form-field>
     </form>
     <form class="password-field">
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Confirm Password" value="Confirm Password">
+            <input #confpass matInput placeholder="Confirm Password" value="Confirm Password">
         </mat-form-field>
     </form>
-    <button class="Sign Up" mat-button>Sign Up</button>
+    <button class="Sign Up" (click)="signUp(username.value, pass.value, confpass.value)" mat-button>Sign Up</button>
 </div>
 <div fxFlex="40%"></div>
