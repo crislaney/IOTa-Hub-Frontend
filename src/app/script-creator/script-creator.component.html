@@ -1,24 +1,18 @@
-<div fxLayout="column" fxFlex="30%">
-    <h1>Script Creator</h1>
-    <form class="script-name" fxShow fxHide.xs="true">
-        <mat-form-field class="example-full-width">
-            <input matInput placeholder="Script Name" value="Script_1">
+<div fxLayout="column" fxFlex="100%" fxLayoutAlign="end">
+    <h1 fxLayoutAlign="center">Script Creator</h1>
+    <form fxLayoutAlign="center" class="script-name" fxShow fxHide.xs="true">
+        <mat-form-field text-align="center" fxLayoutAlign="center" class="example-full-width">
+            <input #scriptName matInput text-align="center" placeholder="Script Name" value="Script_1">
         </mat-form-field>
     </form>
-    <mat-list>
-        <mat-list-item>
-            <h2>Step 1</h2>
-        </mat-list-item>
-        <mat-list-item>
-            <h2>Step 2</h2>
-        </mat-list-item>
-        <mat-list-item>
-            <h2>Step 3</h2>
+    <mat-list *ngFor="let step of script; let i = index">
+        <mat-list-item (click)="playStep(i)">
+            <h2>Step {{i}}</h2>
         </mat-list-item>
     </mat-list>
     <div fxLayout="row">
-        <button class="save-step" mat-button>Save Step</button>
-        <span style="flex: 1 1 auto;"></span>
-        <button class="save-script" mat-button>Save Script</button>
+        <button class="save-step" (click)="getStep()" mat-button>Save Step</button>
+        <button style="flex: 1 1 auto;" (click)="playScript()" mat-button>Run Script</button>
+        <button class="save-script" (click)="postScript(scriptName.value)" mat-button>Save Script</button>
     </div>
 </div>

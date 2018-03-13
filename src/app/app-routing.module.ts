@@ -5,6 +5,8 @@ import { ScriptCreatorComponent } from './script-creator/script-creator.componen
 import { SignUpComponent } from './sign-up/sign-up.component'
 import { SignInComponent } from './sign-in/sign-in.component'
 import { AboutComponent } from './about/about.component'
+import { ScriptAndUpdaterComponent } from './script-and-updater/script-and-updater.component';
+import { SavedScriptsComponent } from './saved-scripts/saved-scripts.component';
 
 const routes: Routes = [
     {
@@ -16,8 +18,8 @@ const routes: Routes = [
         component: LightsComponent
     },
     {
-        path: 'script-creator-temp',
-        component: ScriptCreatorComponent
+        path: 'script-creator',
+        component: ScriptAndUpdaterComponent
     },
     {
         path: 'sign-up',
@@ -31,6 +33,10 @@ const routes: Routes = [
         path: 'about',
         component: AboutComponent 
     },
+    {
+        path: 'scripts',
+        component: SavedScriptsComponent
+    }
 ]
 
 @NgModule({

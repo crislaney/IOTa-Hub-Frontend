@@ -1,0 +1,3 @@
+<div fxLayout="row wrap" *ngFor="let script of scripts">
+    <button (click)="playScript(script.id)" mat-button>{{script.name}}</button>
+</div>

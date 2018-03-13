@@ -12,7 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './about/about.component';
 import { ScriptCreatorComponent } from './script-creator/script-creator.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { SignInComponent } from './sign-in/sign-in.component'
+import { SignInComponent } from './sign-in/sign-in.component';
+import { ScriptAndUpdaterComponent } from './script-and-updater/script-and-updater.component';
+import { SavedScriptsComponent } from './saved-scripts/saved-scripts.component'
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { SignInComponent } from './sign-in/sign-in.component'
     ScriptCreatorComponent,
     SignUpComponent,
     SignInComponent,
+    ScriptAndUpdaterComponent,
+    SavedScriptsComponent,
   ],
   imports: [
     BrowserModule,

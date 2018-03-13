@@ -1,5 +1,4 @@
-
-mat-list-item{
+mat-list-item {
     /*border-style: solid;*/
     border-width: .11em;
     border-radius: 2px;
@@ -7,10 +6,17 @@ mat-list-item{
     box-shadow: .1em .1em 2px grey;
 }
 
-.save-step{
+.save-step {
     align-items: flex-start;
 }
 
-.save-script{
+.save-script {
     align-items: flex-end;
+}
+
+button {
+    border-width: .11em;
+    border-radius: 2px;
+    border-color: grey;
+    box-shadow: .1em .1em 2px grey;
 }
