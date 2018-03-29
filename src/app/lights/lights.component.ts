@@ -16,6 +16,7 @@ export class LightsComponent implements OnInit {
   public lights: Light[];
 
   getAllLights(){
+    /*
     let get_url: string = "http://localhost:5000/api/lights";
     this.http.get(get_url, {responseType: 'text'}).subscribe(data=>{
       let data_json = JSON.parse(data);
@@ -34,9 +35,11 @@ export class LightsComponent implements OnInit {
         this.lights.push(new Light(key, rgb_list, bri, is_on))
       }
     });
+    */
   }
 
   putLightChange(light: Light){
+    /*
     let url_name: string = encodeURI(light.name);
     
     let put_light_url: string = "http://localhost:5000/api/light/" + url_name;
@@ -47,7 +50,15 @@ export class LightsComponent implements OnInit {
    }).subscribe(data=>{
       //nconsole.log(data);
     })
+    */
   }
+
+
+  getSatValue(light: Light){
+
+  }
+
+  
 
   onOffToggle(light: Light){
     light.is_on = !light.is_on;
@@ -55,35 +66,43 @@ export class LightsComponent implements OnInit {
     this.putLightChange(light);
   }
 
-  colorChange(light: Light, color_sel: string, color_val: number) {
-    let val_str = color_val.toString(16);
-    if(val_str.length === 1){
-      val_str = "0" + val_str;
-    }
-
-    let new_rgb: [number, number, number] = light.rgb;
-    if(color_sel === "red"){
-      new_rgb[0] = color_val;
-    }
-    else if(color_sel === "green"){
-      new_rgb[1] = color_val;
-    }
-    else if(color_sel === "blue"){
-      new_rgb[2] = color_val;
-    }
+  colorChange(light: Light, color_val: number) {
+    light.hue = color_val;
+    // make request for new xy as well
 
     this.putLightChange(light);
   }
+
+  satChange(light: Light, val: number) {
+    light.bri = val;
+    this.putLightChange(light);
+  };
 
   briChange(light: Light, val: number) {
     light.bri = val;
     this.putLightChange(light);
   };
 
+
   constructor(private http:HttpClient) { 
-    console.log("In constructor");
+    let light_1 = new Light("light 1", 0, 200, false, .6, .2); //red
+    let light_2 = new Light("light 2", 12750, 100, false, .51, .36); //yellow
+    let light_3 = new Light("light 3", 25500, 50, true, .2, .5); //green
+    let light_4 = new Light("light 4", 46920, 250, true, .17, .2); //blue 
+    let light_5 = new Light("light 5", 56100, 10, true, .35, .15); //purple
+    let light_6 = new Light("light 6", 65280, 150, true, .6, .3); //red
+    let light_7 = new Light("light 7", 0, 254, true, .6, .3); //red
 
     this.lights = []
+
+    this.lights.push(light_1);
+    this.lights.push(light_2);
+    this.lights.push(light_3);
+    this.lights.push(light_4);
+    this.lights.push(light_5);
+    this.lights.push(light_6);
+    this.lights.push(light_7);
+
     this.bri_val = 0;
 
     this.getAllLights();

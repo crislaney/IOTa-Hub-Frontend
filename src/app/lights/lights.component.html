@@ -9,16 +9,23 @@
             <div fxLayout="row">
                 <mat-list>
                     <mat-list-item>
-                        <mat-slider (change)="colorChange(light, 'red', redSlide.value)" #redSlide min="0" max="255" step="1" value={{light.rgb[0]}}></mat-slider>
+                        <input id="colorSlide" #colorSlide class="slider" 
+                        (change)="colorChange(light, colorSlide.value)" 
+                        type="range" min="0" max="65280" value="{{light.hue}}">
                     </mat-list-item>
                     <mat-list-item>
-                        <mat-slider (change)="colorChange(light, 'green', greenSlide.value)" #greenSlide min="0" max="255" step="1" value={{light.rgb[1]}}></mat-slider>
+                        <input 
+                        [ngStyle]="{background: light.buildSatStyle()}" id="satSlide" #satSlide class="slider" 
+                        (change)="satChange(light, satSlide.value)" type="range" 
+                        min="0" max="256" value="{{light.sat}}">
                     </mat-list-item>
                     <mat-list-item>
-                        <mat-slider (change)="colorChange(light, 'blue', blueSlide.value)" #blueSlide min="0" max="255" step="1" value={{light.rgb[2]}}></mat-slider>
+                    <input id="briSlide" #briSlide class="slider" 
+                    [ngStyle]="{background: light.buildBriStyle()}" id="satSlide" #satSlide class="slider" 
+                    (change)="briChange(light, briSlide.value)" 
+                    type="range" min="0" max="256" value="{{light.sat}}">
                     </mat-list-item>
                 </mat-list>
-                <mat-slider vertical #briSlide (change)="briChange(light, briSlide.value)" [value]="light.bri" [min]="0" [max]="254" [step]="1"></mat-slider>
             </div>
         </div>
     </div>

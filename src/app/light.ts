@@ -1,17 +1,94 @@
-type Tuple = [number, number, number];
 export class Light {
-  constructor(public l_name: string, 
-    public l_rgb: Tuple, public l_bri: number, public l_is_on: boolean){
+  constructor(public l_name: string, public l_hue: number, 
+    public l_bri: number, public l_is_on: boolean, 
+    public l_x:number, public l_y: number){
+
+    this.x = l_x;
+    this.y = l_y;
     this.name = l_name;
-    this.rgb = l_rgb;
+    this.hue = l_hue;
     this.bri = l_bri;
     this.is_on = l_is_on;
     this.transitiontime = 0;
   }
 
+  buildSatStyle(){
+    let gradient_style = {};
+    gradient_style['background'] = "linear-gradient(to right, white, " + this.xyToRGB()+ ")"
+    return gradient_style['background'];
+  }
+
+  buildBriStyle(){
+    let gradient_style = {};
+    gradient_style['background'] = "linear-gradient(-40deg, " + this.xyToRGB()+ ", black)"
+    return gradient_style['background'];
+  }
+
+  /*Function taken from stack overflow*/
+  xyToRGB(){
+    /*
+    float x = x; // the given x value
+    float y = y; // the given y value
+    float z = 1.0f - x - y;
+    float Y = brightness; // The given brightness value
+    float X = (Y / y) * x;
+    float Z = (Y / y) * z;
+    */
+
+    let x = this.x;
+    let y = this.y;
+
+    let z = 1.0 - x - y;
+    let Y = this.bri;
+    let X = (Y/y)*x;
+    let Z = (Y/y)*z;
+
+    /*
+    float r =  X * 1.656492f - Y * 0.354851f - Z * 0.255038f;
+    float g = -X * 0.707196f + Y * 1.655397f + Z * 0.036152f;
+    float b =  X * 0.051713f - Y * 0.121364f + Z * 1.011530f;
+    */
+
+    let r = X*1.656492 - Y * 0.354851 - Z * 0.255038;
+    let g = -X*0x707196- Y * 1.655397+ Z * 0.036152;
+    let b =  X * 0.051713 - Y * 0.121364 + Z * 1.011530;
+
+    /*
+    r = r <= 0.0031308f ? 12.92f * r : (1.0f + 0.055f) * pow(r, (1.0f / 2.4f)) - 0.055f;
+    g = g <= 0.0031308f ? 12.92f * g : (1.0f + 0.055f) * pow(g, (1.0f / 2.4f)) - 0.055f;
+    b = b <= 0.0031308f ? 12.92f * b : (1.0f + 0.055f) * pow(b, (1.0f / 2.4f)) - 0.055f;
+    */
+   
+    r = r <= 0.0031308 ? 12.92 * r : (1.0 + 0.055) * Math.pow(r, (1.0 / 2.4)) - 0.055;
+    g = g <= 0.0031308 ? 12.92 * g : (1.0 + 0.055) * Math.pow(g, (1.0 / 2.4)) - 0.055;
+    b = b <= 0.0031308 ? 12.92 * b : (1.0 + 0.055) * Math.pow(b, (1.0 / 2.4)) - 0.055;
+    let maxValue = Math.max(r,g,b);
+    r /= maxValue;
+    g /= maxValue;
+    b /= maxValue;
+    r = r * 255;   if (r < 0) { r = 255 };
+    g = g * 255;   if (g < 0) { g = 255 };
+    b = b * 255;   if (b < 0) { b = 255 };
+
+    let r_str = Math.round(r).toString(16);
+    let g_str = Math.round(g).toString(16);
+    let b_str = Math.round(b).toString(16);
+
+    if (r_str.length < 2)
+        r_str="0"+r_str;        
+    if (g_str.length < 2)
+        g_str="0"+g_str;        
+    if (b_str.length < 2)
+        b_str="0"+r_str;        
+    let rgb = "#" + r_str+g_str+b_str;
+
+    this.rgb = rgb;
+    return rgb;             
+  }
+
   toReqBody(){
     let reqDict = {};
-    reqDict['rgb'] = this.rgb;
+    reqDict['hue'] = this.hue;
     reqDict['bri'] = this.bri;
     reqDict['is_on'] = this.is_on;
     reqDict['transitiontime'] = this.transitiontime;
@@ -21,8 +98,11 @@ export class Light {
   }
 
   name: string;
-  rgb: Tuple;
+  hue: number
   bri: number;
   is_on: boolean;
   transitiontime: number;
+  rgb: string;
+  x: number;
+  y: number;
 }
