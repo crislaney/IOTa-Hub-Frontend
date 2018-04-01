@@ -14,7 +14,8 @@ import { ScriptCreatorComponent } from './script-creator/script-creator.componen
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ScriptAndUpdaterComponent } from './script-and-updater/script-and-updater.component';
-import { SavedScriptsComponent } from './saved-scripts/saved-scripts.component'
+import { SavedScriptsComponent } from './saved-scripts/saved-scripts.component';
+import { GradientColorPickerComponent } from './gradient-color-picker/gradient-color-picker.component'
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SavedScriptsComponent } from './saved-scripts/saved-scripts.component'
     SignInComponent,
     ScriptAndUpdaterComponent,
     SavedScriptsComponent,
+    GradientColorPickerComponent,
   ],
   imports: [
     BrowserModule,

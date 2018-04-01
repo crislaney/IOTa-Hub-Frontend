@@ -1,15 +1,18 @@
 export class Light {
   constructor(public l_name: string, public l_hue: number, 
-    public l_bri: number, public l_is_on: boolean, 
+    l_sat: number, public l_bri: number, public l_is_on: boolean, 
     public l_x:number, public l_y: number){
 
-    this.x = l_x;
-    this.y = l_y;
     this.name = l_name;
     this.hue = l_hue;
     this.bri = l_bri;
+    this.sat = l_sat;
     this.is_on = l_is_on;
     this.transitiontime = 0;
+    this.x = l_x;
+    console.log("X val: " + this.x)
+    this.y = l_y;
+    console.log("Y val: " + this.y)
   }
 
   buildSatStyle(){
@@ -50,7 +53,7 @@ export class Light {
     */
 
     let r = X*1.656492 - Y * 0.354851 - Z * 0.255038;
-    let g = -X*0x707196- Y * 1.655397+ Z * 0.036152;
+    let g = -X* 0.707196 - Y * 1.655397+ Z * 0.036152;
     let b =  X * 0.051713 - Y * 0.121364 + Z * 1.011530;
 
     /*
@@ -62,10 +65,12 @@ export class Light {
     r = r <= 0.0031308 ? 12.92 * r : (1.0 + 0.055) * Math.pow(r, (1.0 / 2.4)) - 0.055;
     g = g <= 0.0031308 ? 12.92 * g : (1.0 + 0.055) * Math.pow(g, (1.0 / 2.4)) - 0.055;
     b = b <= 0.0031308 ? 12.92 * b : (1.0 + 0.055) * Math.pow(b, (1.0 / 2.4)) - 0.055;
+
     let maxValue = Math.max(r,g,b);
     r /= maxValue;
     g /= maxValue;
     b /= maxValue;
+
     r = r * 255;   if (r < 0) { r = 255 };
     g = g * 255;   if (g < 0) { g = 255 };
     b = b * 255;   if (b < 0) { b = 255 };
@@ -83,6 +88,8 @@ export class Light {
     let rgb = "#" + r_str+g_str+b_str;
 
     this.rgb = rgb;
+    console.log("Name: " + this.name);
+    console.log(rgb);
     return rgb;             
   }
 
@@ -90,16 +97,19 @@ export class Light {
     let reqDict = {};
     reqDict['hue'] = this.hue;
     reqDict['bri'] = this.bri;
+    reqDict['sat'] = this.sat;
     reqDict['is_on'] = this.is_on;
     reqDict['transitiontime'] = this.transitiontime;
 
     let light_json = JSON.stringify(reqDict);
+    console.log(light_json);
     return light_json;
   }
 
   name: string;
   hue: number
   bri: number;
+  sat: number;
   is_on: boolean;
   transitiontime: number;
   rgb: string;

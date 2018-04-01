@@ -16,41 +16,39 @@ export class LightsComponent implements OnInit {
   public lights: Light[];
 
   getAllLights(){
-    /*
     let get_url: string = "http://localhost:5000/api/lights";
     this.http.get(get_url, {responseType: 'text'}).subscribe(data=>{
       let data_json = JSON.parse(data);
       for (let key in data_json){
         let value = data_json[key];
-        let red = value['rgb_hex'].substr(0, 2);
-        let green = value['rgb_hex'].substr(2, 2);
-        let blue = value['rgb_hex'].substr(4, 2);
-        
-        let rgb_list:[number, number, number] = [parseInt(red, 16), parseInt(green, 16), 
-          parseInt(blue, 16)];
 
+        let x = value['xy'][0];
+        let y = value['xy'][1];
+        let hue = value['hue'];
         let bri = value['bri'];
         let is_on = value['on'];
+        let sat = value['sat'];
 
-        this.lights.push(new Light(key, rgb_list, bri, is_on))
+        let new_light = new Light(key, hue, sat, bri, is_on, x, y);
+        // Set sat
+        new_light.xyToRGB();
+        this.lights.push(new_light);
       }
     });
-    */
   }
 
   putLightChange(light: Light){
-    /*
     let url_name: string = encodeURI(light.name);
     
     let put_light_url: string = "http://localhost:5000/api/light/" + url_name;
     let body = light.toReqBody();
+    console.log(body);
     this.http.put(put_light_url, body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       responseType: 'text' 
    }).subscribe(data=>{
-      //nconsole.log(data);
+      console.log(data);
     })
-    */
   }
 
 
@@ -69,41 +67,24 @@ export class LightsComponent implements OnInit {
   colorChange(light: Light, color_val: number) {
     light.hue = color_val;
     // make request for new xy as well
-
     this.putLightChange(light);
   }
 
   satChange(light: Light, val: number) {
-    light.bri = val;
+    console.log("SAT CHANGE: " + val);
+    light.sat = val;
     this.putLightChange(light);
   };
 
   briChange(light: Light, val: number) {
+    console.log("BRI CHANGE: " + val);
     light.bri = val;
     this.putLightChange(light);
   };
 
 
   constructor(private http:HttpClient) { 
-    let light_1 = new Light("light 1", 0, 200, false, .6, .2); //red
-    let light_2 = new Light("light 2", 12750, 100, false, .51, .36); //yellow
-    let light_3 = new Light("light 3", 25500, 50, true, .2, .5); //green
-    let light_4 = new Light("light 4", 46920, 250, true, .17, .2); //blue 
-    let light_5 = new Light("light 5", 56100, 10, true, .35, .15); //purple
-    let light_6 = new Light("light 6", 65280, 150, true, .6, .3); //red
-    let light_7 = new Light("light 7", 0, 254, true, .6, .3); //red
-
     this.lights = []
-
-    this.lights.push(light_1);
-    this.lights.push(light_2);
-    this.lights.push(light_3);
-    this.lights.push(light_4);
-    this.lights.push(light_5);
-    this.lights.push(light_6);
-    this.lights.push(light_7);
-
-    this.bri_val = 0;
 
     this.getAllLights();
   }

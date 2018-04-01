@@ -7,6 +7,7 @@ import { SignInComponent } from './sign-in/sign-in.component'
 import { AboutComponent } from './about/about.component'
 import { ScriptAndUpdaterComponent } from './script-and-updater/script-and-updater.component';
 import { SavedScriptsComponent } from './saved-scripts/saved-scripts.component';
+import { GradientColorPickerComponent } from './gradient-color-picker/gradient-color-picker.component';
 
 const routes: Routes = [
     {
@@ -36,6 +37,10 @@ const routes: Routes = [
     {
         path: 'scripts',
         component: SavedScriptsComponent
+    },
+    {
+        path: 'colorPicker',
+        component: GradientColorPickerComponent
     }
 ]
 
