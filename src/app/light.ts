@@ -1,29 +1,29 @@
 export class Light {
   constructor(public l_name: string, public l_hue: number, 
-    l_sat: number, public l_bri: number, public l_is_on: boolean, 
+    l_sat: number, public l_bri: number, public l_on: boolean, 
     public l_x:number, public l_y: number){
 
     this.name = l_name;
     this.hue = l_hue;
     this.bri = l_bri;
     this.sat = l_sat;
-    this.is_on = l_is_on;
-    this.transitiontime = 0;
+    this.on = l_on;
+    this.transitiontime = 1;
     this.x = l_x;
-    console.log("X val: " + this.x)
     this.y = l_y;
-    console.log("Y val: " + this.y)
+    this.satStyle = this.buildSatStyle();
+    this.briStyle = this.buildBriStyle();
   }
 
   buildSatStyle(){
     let gradient_style = {};
-    gradient_style['background'] = "linear-gradient(to right, white, " + this.xyToRGB()+ ")"
+    gradient_style['background'] = "linear-gradient(to right, white, yellow)"
     return gradient_style['background'];
   }
 
   buildBriStyle(){
     let gradient_style = {};
-    gradient_style['background'] = "linear-gradient(-40deg, " + this.xyToRGB()+ ", black)"
+    gradient_style['background'] = "linear-gradient(-40deg, yellow, black)"
     return gradient_style['background'];
   }
 
@@ -88,8 +88,6 @@ export class Light {
     let rgb = "#" + r_str+g_str+b_str;
 
     this.rgb = rgb;
-    console.log("Name: " + this.name);
-    console.log(rgb);
     return rgb;             
   }
 
@@ -98,7 +96,8 @@ export class Light {
     reqDict['hue'] = this.hue;
     reqDict['bri'] = this.bri;
     reqDict['sat'] = this.sat;
-    reqDict['is_on'] = this.is_on;
+    reqDict['on'] = this.on;
+    console.log("Building req. Tran time: " + this.transitiontime);
     reqDict['transitiontime'] = this.transitiontime;
 
     let light_json = JSON.stringify(reqDict);
@@ -110,9 +109,11 @@ export class Light {
   hue: number
   bri: number;
   sat: number;
-  is_on: boolean;
+  on: boolean;
   transitiontime: number;
   rgb: string;
   x: number;
   y: number;
+  briStyle: string;
+  satStyle: string;
 }

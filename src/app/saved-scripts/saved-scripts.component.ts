@@ -28,9 +28,7 @@ export class SavedScriptsComponent implements OnInit {
       list_of_scripts.forEach((script, index)=>{
         console.log("name: " + script['name']);
         console.log("id: " + script['id']);
-        let temp_script = new Script(script['name'], script['id']);
-        console.log(temp_script);
-        this.scripts.push(temp_script);
+        this.scripts.push(new Script(script['name'], script['id']));
       });
     });
   }

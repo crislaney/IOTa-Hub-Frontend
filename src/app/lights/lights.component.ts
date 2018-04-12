@@ -26,10 +26,10 @@ export class LightsComponent implements OnInit {
         let y = value['xy'][1];
         let hue = value['hue'];
         let bri = value['bri'];
-        let is_on = value['on'];
+        let on = value['on'];
         let sat = value['sat'];
 
-        let new_light = new Light(key, hue, sat, bri, is_on, x, y);
+        let new_light = new Light(key, hue, sat, bri, on, x, y);
         // Set sat
         new_light.xyToRGB();
         this.lights.push(new_light);
@@ -50,34 +50,27 @@ export class LightsComponent implements OnInit {
       console.log(data);
     })
   }
-
-
-  getSatValue(light: Light){
-
-  }
-
   
 
   onOffToggle(light: Light){
-    light.is_on = !light.is_on;
-    console.log(light.is_on);
+    light.on = !light.on;
     this.putLightChange(light);
   }
 
   colorChange(light: Light, color_val: number) {
     light.hue = color_val;
     // make request for new xy as well
+    light.buildSatStyle();
+    light.buildBriStyle();
     this.putLightChange(light);
   }
 
   satChange(light: Light, val: number) {
-    console.log("SAT CHANGE: " + val);
     light.sat = val;
     this.putLightChange(light);
   };
 
   briChange(light: Light, val: number) {
-    console.log("BRI CHANGE: " + val);
     light.bri = val;
     this.putLightChange(light);
   };

@@ -25,22 +25,33 @@ export class ScriptCreatorComponent implements OnInit {
 
     let get_url: string = "http://localhost:5000/api/step";
     this.http.get(get_url, {headers: httpOptions.headers, responseType:'text'}).subscribe(data=>{ 
-      console.log(data);
-      this.script.push(data);
+      let temp = JSON.parse(data);
+      for(let key in temp){
+        temp[key]['transitiontime'] = 10;
+        // console.log(temp[key]['transitiontime']);
+      }
+      this.script.push(JSON.stringify(temp));
     });
   }
 
-  playStep(step_num:number){
+  playStep(step_num:number, transitiontime:number){
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'JWT ' + localStorage.getItem('access_token')
       })
     };
 
+    let temp = JSON.parse(this.script[step_num]);
+    for(let key in temp){
+      temp[key]['transitiontime'] = transitiontime;
+    }
+
+    let body = JSON.stringify(temp);
+    console.log(body);
+
     let put_url: string = "http://localhost:5000/api/step";
-    let body = this.script[step_num]
     this.http.put(put_url, body, {headers: httpOptions.headers, responseType:'text'}).subscribe(data=>{ 
-      console.log(data);
+      // console.log(data);
     });
   }
 
@@ -53,9 +64,10 @@ export class ScriptCreatorComponent implements OnInit {
 
     let put_url: string = "http://localhost:5000/api/step";
     let body = this.script;
-    JSON.stringify(body)
+    let body_json = JSON.stringify(body)
+    // console.log(body_json);
     this.http.put(put_url, body, {headers: httpOptions.headers, responseType:'text'}).subscribe(data=>{ 
-      console.log(data);
+      // console.log(data);
     });
   }
 
@@ -72,7 +84,7 @@ export class ScriptCreatorComponent implements OnInit {
     body_dict['name'] = name;
     body_dict['steps'] = this.script;
     this.http.post(post_url, JSON.stringify(body_dict), {headers: httpOptions.headers, responseType:'text'}).subscribe(data=>{ 
-      console.log(data);
+      // console.log(data);
     });
 
   }

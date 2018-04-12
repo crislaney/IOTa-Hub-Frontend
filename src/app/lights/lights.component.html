@@ -9,13 +9,13 @@
             <div fxLayout="row">
                 <mat-list>
                     <mat-list-item>
-                        <input id="colorSlide" #colorSlide class="slider" (change)="colorChange(light, colorSlide.value)" type="range" min="0" max="65280" value="{{light.hue}}">
+                        <input #colorSlide id="colorSlide" class="slider" (change)="colorChange(light, colorSlide.value)" type="range" min="0" max="65280" value="{{light.hue}}">
                     </mat-list-item>
                     <mat-list-item>
-                        <input #satSlide [ngStyle]="{background: light.buildSatStyle()}" class="slider" (change)="satChange(light, satSlide.value)" type="range" min="0" max="256" value="{{light.sat}}">
+                        <input #satSlide [style.background]="light.satStyle" class="slider" (change)="satChange(light, satSlide.value)" type="range" min="0" max="256" value="{{light.sat}}">
                     </mat-list-item>
                     <mat-list-item>
-                        <input #briSlide [ngStyle]="{background: light.buildBriStyle()}" class="slider" (change)="briChange(light, briSlide.value)" type="range" min="0" max="256" value="{{light.bri}}">
+                        <input #briSlide [ngStyle]="{background: light.briStyle}" class="slider" (change)="briChange(light, briSlide.value)" type="range" min="0" max="256" value="{{light.bri}}">
                     </mat-list-item>
                 </mat-list>
             </div>
