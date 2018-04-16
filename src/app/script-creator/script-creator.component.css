@@ -6,13 +6,28 @@ mat-list-item {
     box-shadow: .1em .1em 2px grey;
 }
 
+.tran-time {
+    height: 100%;
+}
+
 .save-step {
     align-items: flex-start;
+}
+
+.step-item {
+    height: 100%;
+    padding-bottom: 15px;
 }
 
 .save-script {
     align-items: flex-end;
 }
+
+.list-item {
+    padding-bottom: 10px;
+}
+
+.step-name {}
 
 button {
     border-width: .11em;

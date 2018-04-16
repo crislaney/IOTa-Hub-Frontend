@@ -6,12 +6,14 @@
         </mat-form-field>
     </form>
     <mat-list *ngFor="let step of script; let i = index">
-        <mat-list-item>
-            <div fxLayout="row" fxFlex="100%">
-                <h2 fxFlex="90%" (click)="playStep(i, transTime.value)">Step {{i}}</h2>
-                <mat-form-field fxFlex="10%" fxLayoutAlign="end" class="example-full-width">
-                    <input matInput #transTime fxLayoutAlign="end" placeholder="Transition Time" value="10" type="number" matTextareaAutosize matAutosizeMinRows="2">
-                </mat-form-field>
+        <mat-list-item class="list-item">
+            <div fxLayout="row" fxFlex="100%" class="step-item">
+                <h2 class="step-name" fxFlex="60%" (click)="playStep(i, transTime.value)">Step {{i}}</h2>
+                <!-- <mat-form-field fxFlex="40%"> -->
+                <input #transTime class="tran-time" placeholder="Transition" type="number">
+                <!-- </mat-form-field> -->
+                <!--(change)="setTransitionTime(i, transTime.value)" -->
+                <!--<span><input [ngStyle]="{'height':'30px'}" fxFlex="50%" #transTime placeholder="Transition Time" value="10" type="number"></span>-->
             </div>
         </mat-list-item>
     </mat-list>
